@@ -4,12 +4,26 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:TasksManagementApp"
-    Shell.FlyoutBehavior="Disabled"
+    xmlns:views="clr-namespace:TasksManagementApp.Views"
+    Shell.FlyoutBehavior="Flyout"
     Title="TasksManagementApp">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems" Route="tabs">
+        <ShellContent
+            Title="Tasks" Icon="tasks2.png"
+            ContentTemplate="{DataTemplate views:TasksView}"
+            Route="Tasks" />
+        <ShellContent
+    Title="Profile" Icon="profile.png"
+    ContentTemplate="{DataTemplate views:EditProfileView}"
+    Route="Profile" />
+        <ShellContent IsVisible="{Binding IsManager}"
+Title="Report" Icon="manager2.png"
+ContentTemplate="{DataTemplate views:ManagerReport}"
+Route="Report" />
+
+
+    </FlyoutItem>
+    
 
 </Shell>

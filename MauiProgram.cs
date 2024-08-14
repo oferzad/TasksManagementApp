@@ -54,6 +54,7 @@ namespace TasksManagementApp
             builder.Services.AddTransient<RegisterViewModel>();
             builder.Services.AddTransient<TasksViewModel>();
             builder.Services.AddTransient<TaskViewModel>();
+            builder.Services.AddSingleton<AppShellViewModel>();
             return builder;
         }
     }

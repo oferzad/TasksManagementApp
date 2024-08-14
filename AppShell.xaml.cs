@@ -1,10 +1,15 @@
-﻿namespace TasksManagementApp
+﻿using TasksManagementApp.ViewModels;
+
+namespace TasksManagementApp
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        public AppShell(AppShellViewModel vm)
         {
+            this.BindingContext = vm;
             InitializeComponent();
         }
+
+
     }
 }
