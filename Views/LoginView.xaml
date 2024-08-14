@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:TasksManagementApp.ViewModels"
+             x:Class="TasksManagementApp.Views.LoginView"
+             x:DataType="viewmodels:LoginViewModel"
+             Title="Login">
+    <VerticalStackLayout Padding="20" Spacing="15">
+      
+        <Entry 
+        Placeholder="Email"
+        Keyboard="Email"
+        Text="{Binding Email}" IsEnabled="{Binding NotInServerCall}"/>
+
+        <Entry 
+        Placeholder="Password"
+        IsPassword="True"
+        Text="{Binding Password}" IsEnabled="{Binding NotInServerCall}"/>
+
+        <Button 
+        Text="Login"
+        Command="{Binding LoginCommand}" IsEnabled="{Binding NotInServerCall}"/>
+        <Label Text="{Binding ErrorMsg}" TextColor="Red" HorizontalOptions="Center"></Label>
+        <Label 
+        Text="Don't have an account? Register"
+        TextColor="Blue"
+        HorizontalOptions="Center"
+        VerticalOptions="End" IsEnabled="{Binding NotInServerCall}">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding RegisterCommand}"/>
+            </Label.GestureRecognizers>
+        </Label>
+        <ActivityIndicator IsRunning="{Binding InServerCall}" Color="Red"></ActivityIndicator>
+    </VerticalStackLayout>
+</ContentPage>
