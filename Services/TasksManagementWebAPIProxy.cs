@@ -236,6 +236,39 @@ namespace TasksManagementApp.Services
             }
         }
 
+        //This method call the getUrgencyLevels web API and return a list of UrgencyLevel or null if it fails.
+        public async Task<List<UrgencyLevel>?> GetUrgencyLevels()
+        {
+            //Set URI to the specific function API
+            string url = $"{this.baseUrl}getUrgencyLevels";
+            try
+            {
+                //Call the server API
+                HttpResponseMessage response = await client.GetAsync(url);
+                //Extract the content as string
+                string resContent = await response.Content.ReadAsStringAsync();
+                //Check status
+                if (response.IsSuccessStatusCode)
+                {
+                    //Desrialize result
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    List<UrgencyLevel>? result = JsonSerializer.Deserialize<List<UrgencyLevel>>(resContent, options);
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
         //This method call the check Web API and return a string with the server status
         public async Task<string> Check()
         {
