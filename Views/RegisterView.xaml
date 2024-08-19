@@ -52,8 +52,15 @@
                 <Label Text="Password" Grid.Column="0" Style="{StaticResource labelNameStyle}" />
                 <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
             </Grid>
-            <Entry Placeholder="Type Password" Text="{Binding Password}" IsPassword="True" Style="{StaticResource entryStyle}" />
-
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Placeholder="Type Password" Text="{Binding Password}" IsPassword="{Binding IsPassword}" Style="{StaticResource entryStyle}" />
+                <ImageButton Grid.Column="1" HeightRequest="25" Source="passwordeye.jpg" Command="{Binding ShowPasswordCommand}" />
+            </Grid>
+            
             <!-- Register and Cancel Buttons -->
             <Grid>
                 <Grid.ColumnDefinitions>

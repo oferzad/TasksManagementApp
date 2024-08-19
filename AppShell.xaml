@@ -24,6 +24,7 @@ Route="Report" />
 
 
     </FlyoutItem>
-    
+    <MenuItem Text="Logout" Command="{Binding LogoutCommand}" />
+
 
 </Shell>

@@ -31,7 +31,6 @@ namespace TasksManagementApp
         public static MauiAppBuilder RegisterPages(this MauiAppBuilder builder)
         {
             builder.Services.AddTransient<LoginView>();
-            builder.Services.AddTransient<AddTaskView>();
             builder.Services.AddTransient<EditProfileView>();
             builder.Services.AddTransient<RegisterView>();
             builder.Services.AddTransient<TasksView>();
@@ -49,10 +48,9 @@ namespace TasksManagementApp
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
         {
             builder.Services.AddTransient<LoginViewModel>();
-            builder.Services.AddTransient<AddTaskViewModel>();
             builder.Services.AddTransient<EditProfileViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
-            builder.Services.AddTransient<TasksViewModel>();
+            builder.Services.AddSingleton<TasksViewModel>();
             builder.Services.AddTransient<TaskViewModel>();
             builder.Services.AddSingleton<AppShellViewModel>();
             return builder;

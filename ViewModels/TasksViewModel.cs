@@ -104,6 +104,14 @@ namespace TasksManagementApp.ViewModels
             SearchText = "";
             showDoneTasks = false;
             showNotDoneTasks = true;
+            AddNewTaskCommand = new Command(AddNewTask);
+            FilterTasks();
+        }
+
+        //This is a public method that should be called when the page needs to be refreshed
+        public void Refresh()
+        {
+            this.userTasks = ((App)Application.Current).LoggedInUser.UserTasks;
             FilterTasks();
         }
 
@@ -150,6 +158,26 @@ namespace TasksManagementApp.ViewModels
             
         }
 
+        //this method trigger the add new task page
+        public Command AddNewTaskCommand { get; set; }
+        private async void AddNewTask()
+        {
+            UserTask task = new UserTask()
+            {
+                TaskId = 0,
+                TaskDescription = "",
+                TaskDueDate = DateOnly.FromDateTime(DateTime.Now),
+                TaskActualDate = null,
+                UrgencyLevelId = ((App)Application.Current).UrgencyLevels[0].UrgencyLevelId,
+                UserId = ((App)Application.Current).LoggedInUser.Id,
+                TaskComments = new List<TaskComment>()
+            };
+            var navParam = new Dictionary<string, object>
+                {
+                    { "selectedTask", task }
+                };
+            await Shell.Current.GoToAsync("taskview", navParam);
+        }
 
 
     }

@@ -60,6 +60,7 @@
 	  <None Remove="Resources\Images\addtask.png" />
 	  <None Remove="Resources\Images\manager.png" />
 	  <None Remove="Resources\Images\manager2.png" />
+	  <None Remove="Resources\Images\passwordeye.jpg" />
 	  <None Remove="Resources\Images\profile.png" />
 	  <None Remove="Resources\Images\tasks.png" />
 	  <None Remove="Resources\Images\tasks2.png" />
@@ -72,9 +73,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Views\AddTaskView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Views\EditProfileView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

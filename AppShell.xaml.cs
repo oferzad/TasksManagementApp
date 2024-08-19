@@ -16,7 +16,6 @@ namespace TasksManagementApp
         {
             Routing.RegisterRoute("taskview", typeof(TaskView));
             Routing.RegisterRoute("editprofile", typeof(EditProfileView));
-            Routing.RegisterRoute("addtask", typeof(AddTaskView));
             Routing.RegisterRoute("tasks", typeof(TasksView));
         }
 

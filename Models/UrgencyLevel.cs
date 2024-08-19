@@ -12,5 +12,10 @@ namespace TasksManagementApp.Models
         public int UrgencyLevelId { get; set; }
         public string UrgencyLevelName { get; set; } = null!;
 
+        public override string ToString()
+        {
+            return UrgencyLevelName;
+        }
+
     }
 }

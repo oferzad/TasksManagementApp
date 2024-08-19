@@ -16,6 +16,8 @@ namespace TasksManagementApp.ViewModels
             this.proxy = proxy;
             RegisterCommand = new Command(OnRegister);
             CancelCommand = new Command(OnCancel);
+            ShowPasswordCommand = new Command(OnShowPassword);
+            IsPassword = true;
             NameError = "Name is required";
             LastNameError = "Last name is required";
             EmailError = "Email is required";
@@ -221,6 +223,26 @@ namespace TasksManagementApp.ViewModels
             }
             else
                 this.ShowPasswordError = false;
+        }
+
+        //This property will indicate if the password entry is a password
+        private bool isPassword = true;
+        public bool IsPassword
+        {
+            get => isPassword;
+            set
+            {
+                isPassword = value;
+                OnPropertyChanged("IsPassword");
+            }
+        }
+        //This command will trigger on pressing the password eye icon
+        public Command ShowPasswordCommand { get; }
+        //This method will be called when the password eye icon is pressed
+        public void OnShowPassword()
+        {
+            //Toggle the password visibility
+            IsPassword = !IsPassword;
         }
         #endregion
 
