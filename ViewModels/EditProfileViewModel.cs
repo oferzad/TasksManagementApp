@@ -19,10 +19,12 @@ namespace TasksManagementApp.ViewModels
             LastName = theUser.UserLastName;
             Email = theUser.UserEmail;
             Password = theUser.UserPassword;
+            UpdatePhotoURL(theUser.ProfileImagePath);
+            LocalPhotoPath = "";
             IsPassword = true;
             SaveCommand = new Command(OnSave);
-            CancelCommand = new Command(OnCancel);
             ShowPasswordCommand = new Command(OnShowPassword);
+            UploadPhotoCommand = new Command(OnUploadPhoto);
             NameError = "Name is required";
             LastNameError = "Last name is required";
             EmailError = "Email is required";
@@ -251,10 +253,68 @@ namespace TasksManagementApp.ViewModels
         }
         #endregion
 
+        #region Photo
+        
+        private string photoURL;
+
+        public string PhotoURL
+        {
+            get => photoURL;
+            set
+            {
+                photoURL = value;
+                OnPropertyChanged("PhotoURL");
+            }
+        }
+
+        private string localPhotoPath;
+
+        public string LocalPhotoPath
+        {
+            get => localPhotoPath;
+            set
+            {
+                localPhotoPath = value;
+                OnPropertyChanged("LocalPhotoPath");
+            }
+        }
+
+        public Command UploadPhotoCommand { get; }
+        //This method open the file picker to select a photo
+        private async void OnUploadPhoto()
+        {
+            try
+            {
+                var result = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Please select a photo",
+                });
+
+                if (result != null)
+                {
+                    // The user picked a file
+                    this.LocalPhotoPath = result.FullPath;
+                    this.PhotoURL = result.FullPath;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+        }
+
+        private void UpdatePhotoURL(string virtualPath)
+        {
+            Random r = new Random();
+            PhotoURL = proxy.GetImagesBaseAddress() + virtualPath + "?v=" + r.Next();
+            LocalPhotoPath = "";
+        }
+
+        #endregion
+
         //Define a command for the Save button
         public Command SaveCommand { get; }
-        public Command CancelCommand { get; }
-
+        
         //Define a method that will be called when the register button is clicked
         public async void OnSave()
         {
@@ -276,16 +336,32 @@ namespace TasksManagementApp.ViewModels
                 //Call the Register method on the proxy to register the new user
                 InServerCall = true;
                 bool success = await proxy.UpdateUser(theUser);
-                InServerCall = false;
+                
 
                 //If the save was successful, navigate to the login page
                 if (success)
                 {
+                    //UPload profile imae if needed
+                    if(!string.IsNullOrEmpty(LocalPhotoPath))
+                    {
+                        AppUser? updatedUser = await proxy.UploadProfileImage(LocalPhotoPath);
+                        if (updatedUser == null)
+                        {
+                            await Shell.Current.DisplayAlert("Save Profile", "User Data Was Saved BUT Profile image upload failed", "ok");
+                        }
+                        else
+                        {
+                            theUser.ProfileImagePath = updatedUser.ProfileImagePath;
+                            UpdatePhotoURL(theUser.ProfileImagePath);
+                        }
+
+                    }
+                    InServerCall = false;
                     await Shell.Current.DisplayAlert("Save Profile", "Profile saved successfully", "ok");
                 }
                 else
                 {
-
+                    InServerCall = false;
                     //If the registration failed, display an error message
                     string errorMsg = "Save Profile failed. Please try again.";
                     await Shell.Current.DisplayAlert("Save Profile", errorMsg, "ok");
@@ -293,11 +369,6 @@ namespace TasksManagementApp.ViewModels
             }
         }
 
-        //Define a method that will be called upon pressing the cancel button
-        public void OnCancel()
-        {
-            //Navigate back to the login page
-            ((App)(Application.Current)).MainPage.Navigation.PopAsync();
-        }
+        
     }
 }

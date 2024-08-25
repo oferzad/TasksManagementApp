@@ -35,7 +35,7 @@ namespace TasksManagementApp
             builder.Services.AddTransient<RegisterView>();
             builder.Services.AddTransient<TasksView>();
             builder.Services.AddTransient<TaskView>();
-            builder.Services.AddSingleton<AppShell>();
+            builder.Services.AddTransient<AppShell>();
 
             return builder;
         }
@@ -50,9 +50,9 @@ namespace TasksManagementApp
             builder.Services.AddTransient<LoginViewModel>();
             builder.Services.AddTransient<EditProfileViewModel>();
             builder.Services.AddTransient<RegisterViewModel>();
-            builder.Services.AddSingleton<TasksViewModel>();
+            builder.Services.AddTransient<TasksViewModel>();
             builder.Services.AddTransient<TaskViewModel>();
-            builder.Services.AddSingleton<AppShellViewModel>();
+            builder.Services.AddTransient<AppShellViewModel>();
             return builder;
         }
     }

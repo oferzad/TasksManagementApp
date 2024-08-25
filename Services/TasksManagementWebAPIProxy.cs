@@ -15,7 +15,8 @@ namespace TasksManagementApp.Services
         private HttpClient client;
         private string baseUrl;
         public static string BaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5110/api/" : "http://localhost:5110/api/";
-        
+        private static string ImageBaseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5110" : "http://localhost:5110";
+
         public TasksManagementWebAPIProxy()
         {
             //Set client handler to support cookies!!
@@ -26,6 +27,15 @@ namespace TasksManagementApp.Services
             this.baseUrl = BaseAddress;
         }
 
+        public string GetImagesBaseAddress()
+        {
+            return TasksManagementWebAPIProxy.ImageBaseAddress;
+        }
+
+        public string GetDefaultProfilePhotoUrl()
+        {
+           return $"{TasksManagementWebAPIProxy.ImageBaseAddress}/profileImages/default.png";
+        }
         public async Task<AppUser?> LoginAsync(LoginInfo userInfo)
         {
             //Set URI to the specific function API
