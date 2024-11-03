@@ -27,11 +27,11 @@ namespace TasksManagementApp.Services
 
         #region with tunnel
         //Define the serevr IP address! (should be realIP address if you are using a device that is not running on the same machine as the server)
-        private static string serverIP = "0jg8w9v7-5110.euw.devtunnels.ms";
+        private static string serverIP = "3zr245ps-5110.euw.devtunnels.ms";
         private HttpClient client;
         private string baseUrl;
-        public static string BaseAddress = "https://0jg8w9v7-5110.euw.devtunnels.ms/api/";
-        private static string ImageBaseAddress = "https://0jg8w9v7-5110.euw.devtunnels.ms/";
+        public static string BaseAddress = "https://3zr245ps-5110.euw.devtunnels.ms/api/";
+        private static string ImageBaseAddress = "https://3zr245ps-5110.euw.devtunnels.ms/";
         #endregion
 
         public TasksManagementWebAPIProxy()
