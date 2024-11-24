@@ -46,7 +46,7 @@ namespace TasksManagementApp.Services;
             return bundle.GetString("com.google.android.geo.API_KEY");
 
 #else
-            return "AIzaSyCz8nXSYXgR0n"+"fzko2h6dJlvtYt3M0LFwM";
+            return "PLACE HERE YOUR API KEY";
 #endif
     }
     public async Task<GoogleDirection> GetDirections(string originLatitude, string originLongitude, string destinationLatitude, string destinationLongitude)

@@ -3,7 +3,7 @@
 	<application android:allowBackup="true" android:icon="@mipmap/appicon" android:supportsRtl="true" android:usesCleartextTraffic="true">
     <meta-data
         android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyCz8nXSYXgR0nfzko2h6dJlvtYt3M0LFwM" />
+        android:value="PLACE_HERE_YOUR_API_KEY" />
 
   </application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
