@@ -4,6 +4,7 @@ using TasksManagementApp.Views;
 
 namespace TasksManagementApp
 {
+   
     public partial class App : Application
     {
         //Application level variables
@@ -32,5 +33,7 @@ namespace TasksManagementApp
                 }
             }
         }
+
+        
     }
 }

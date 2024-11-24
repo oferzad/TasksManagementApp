@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TasksManagementApp.Views.MapsView"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             Title="MapsView">
+    <VerticalStackLayout VerticalOptions="CenterAndExpand">
+        <Entry Text="{Binding Origin}" Placeholder="Origin"></Entry>
+        <CollectionView ItemsSource="{Binding Origins}" SelectionMode="Single" SelectedItem="{Binding SelectedOrigin}" SelectionChangedCommand="{Binding OriginSelection}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Description}"></Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Entry Text="{Binding Destination}" Placeholder="Destination"></Entry>
+        <CollectionView ItemsSource="{Binding Destinations}" SelectionMode="Single" SelectedItem="{Binding SelectedDestination}" SelectionChangedCommand="{Binding DestinationSelection}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding Description}"></Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <OnPlatform x:TypeArguments="Button">
+            <On Platform="Android">
+                <Button Text="Go" Command="{Binding Go}"></Button>
+            </On>
+        </OnPlatform>
+        <OnPlatform x:TypeArguments="maps:Map">
+            <On Platform="Android">
+                <maps:Map x:Name="map" IsShowingUser="False" HeightRequest="550"
+                  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+         />
+            </On>
+        </OnPlatform>
+
+
+
+
+
+    </VerticalStackLayout>
+</ContentPage>

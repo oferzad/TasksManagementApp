@@ -17,6 +17,10 @@
     Title="Profile" Icon="profile.png"
     ContentTemplate="{DataTemplate views:EditProfileView}"
     Route="Profile" />
+        <ShellContent
+Title="Maps" Icon="maps.png"
+ContentTemplate="{DataTemplate views:MapsView}"
+Route="Maps" />
         <ShellContent IsVisible="{Binding IsManager}"
 Title="Report" Icon="manager2.png"
 ContentTemplate="{DataTemplate views:ManagerReport}"

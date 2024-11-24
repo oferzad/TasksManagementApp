@@ -12,6 +12,9 @@ namespace TasksManagementApp
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+#if ANDROID
+                .UseMauiMaps() //Initi Maps
+#endif
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -25,6 +28,9 @@ namespace TasksManagementApp
     		builder.Logging.AddDebug();
 #endif
 
+
+            //Init Google Maps Key
+            GoogleMapsApiService.Initialize();
             return builder.Build();
         }
 
@@ -36,12 +42,15 @@ namespace TasksManagementApp
             builder.Services.AddTransient<TasksView>();
             builder.Services.AddTransient<TaskView>();
             builder.Services.AddTransient<AppShell>();
+            builder.Services.AddTransient<MapsView>();
+
 
             return builder;
         }
 
         public static MauiAppBuilder RegisterDataServices(this MauiAppBuilder builder)
         {
+            builder.Services.AddSingleton<GoogleMapsApiService>();
             builder.Services.AddSingleton<TasksManagementWebAPIProxy>();
             return builder;
         }
@@ -53,6 +62,7 @@ namespace TasksManagementApp
             builder.Services.AddTransient<TasksViewModel>();
             builder.Services.AddTransient<TaskViewModel>();
             builder.Services.AddTransient<AppShellViewModel>();
+            builder.Services.AddTransient<MapsViewModel>();
             return builder;
         }
     }
