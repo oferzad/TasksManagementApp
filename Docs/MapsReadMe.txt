@@ -4,4 +4,4 @@
 4. To use Google places only (for address verification and places search), you need to copy GooglePLaces.cs  into your project.
 5. To use map control (works only for android)  and directions, you need to copy GoogleDirections.cs into your project and add UseMaps to your app builder in mauiProgram class.
 6. For all cases you need to copy GoogleMapsAPIService.cs into your project and you should initialize it (See MauiProgram.cs)
-
+7. To access user location , you need to add permissions in the android manifest.xml
