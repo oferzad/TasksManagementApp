@@ -5,3 +5,5 @@
 5. To use map control (works only for android)  and directions, you need to copy GoogleDirections.cs into your project and add UseMaps to your app builder in mauiProgram class.
 6. For all cases you need to copy GoogleMapsAPIService.cs into your project and you should initialize it (See MauiProgram.cs)
 7. To access user location , you need to add permissions in the android manifest.xml
+8. For simple GeoCoding, Reverse GeoCoding see: https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device/geocoding?view=net-maui-8.0&tabs=android
+9. For GeoLocation see: https://learn.microsoft.com/en-us/dotnet/maui/platform-integration/device/geolocation?view=net-maui-8.0&tabs=android
