@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 
+
 #if ANDROID
 using Android.Content.PM;
 using Android.OS;
@@ -35,7 +36,7 @@ namespace TasksManagementApp.Services;
         }
         public static void Initialize()
         {
-            _googleMapsKey = GetGoogleMapsApiKey();
+        _googleMapsKey =  GetGoogleMapsApiKey();
         }
 
         private static string GetGoogleMapsApiKey()
@@ -111,5 +112,45 @@ namespace TasksManagementApp.Services;
 
             return result;
         }
-    }
 
+    public async Task<AddressComponents> GetAddressComponentsAsync(string address)
+    {
+        using var httpClient = new HttpClient();
+        var url = $"https://maps.googleapis.com/maps/api/geocode/json?address={Uri.EscapeDataString(address)}&key={_googleMapsKey}";
+        var response = await httpClient.GetStringAsync(url);
+        var json = JObject.Parse(response);
+
+        if (json["status"].ToString() != "OK")
+        {
+            return null;
+        }
+
+        var result = json["results"][0];
+        var components = new AddressComponents();
+
+        foreach (var component in result["address_components"])
+        {
+            var types = component["types"].ToObject<string[]>();
+            if (types.Contains("street_number"))
+            {
+                components.Number = component["long_name"].ToString();
+            }
+            else if (types.Contains("route"))
+            {
+                components.Street = component["long_name"].ToString();
+            }
+            else if (types.Contains("locality"))
+            {
+                components.City = component["long_name"].ToString();
+            }
+            else if (types.Contains("country"))
+            {
+                components.Country = component["long_name"].ToString();
+            }
+        }
+
+        return components;
+    }
+}
+
+   

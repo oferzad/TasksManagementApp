@@ -249,6 +249,71 @@ namespace TasksManagementApp.ViewModels
         }
         #endregion
 
+        #region Address
+        private bool showAddressError;
+
+        public bool ShowAddressError
+        {
+            get => showAddressError;
+            set
+            {
+                showAddressError = value;
+                OnPropertyChanged("ShowAddressError");
+            }
+        }
+
+        private string address;
+
+        public string Address
+        {
+            get => address;
+            set
+            {
+                address = value;
+                ValidateAddress();
+                OnPropertyChanged("Address");
+            }
+        }
+
+        private string addressError;
+
+        public string AddressError
+        {
+            get => addressError;
+            set
+            {
+                addressError = value;
+                OnPropertyChanged("AddressError");
+            }
+        }
+
+        private async Task<AddressComponents> ValidateAddress(bool fullValidation = false)
+        {
+            AddressComponents components = null;
+            this.ShowAddressError = string.IsNullOrEmpty(Address);
+            if (fullValidation && !this.ShowAddressError)
+            {
+                    //Check if the address is valid using the GeocodingService
+                    components = await GeocodingService.GetAddressComponentsAsync(Address);
+                    if (components == null)
+                    {
+                        AddressError = "Address is not valid";
+                        ShowAddressError = true;
+                    }
+                    else
+                    {
+                        AddressError = "";
+                        ShowAddressError = false;
+                    }
+            }
+            else
+            {
+                AddressError = "Address is required";
+            }
+            return components;
+        }
+
+        #endregion
         #region Photo
 
         private string photoURL;
@@ -319,8 +384,9 @@ namespace TasksManagementApp.ViewModels
             ValidateLastName();
             ValidateEmail();
             ValidatePassword();
+            AddressComponents components = await ValidateAddress(true);
 
-            if (!ShowNameError && !ShowLastNameError && !ShowEmailError && !ShowPasswordError)
+            if (!ShowAddressError && !ShowNameError && !ShowLastNameError && !ShowEmailError && !ShowPasswordError)
             {
                 //Create a new AppUser object with the data from the registration form
                 var newUser = new AppUser

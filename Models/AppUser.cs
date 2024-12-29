@@ -19,6 +19,8 @@ namespace TasksManagementApp.Models
 
         public string ProfileImagePath { get; set; } = "";
 
+        
+
         public virtual List<UserTask> UserTasks { get; set; } = new List<UserTask>();
 
         public AppUser() { }

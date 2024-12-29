@@ -54,6 +54,18 @@ VerticalOptions="End">
             </Grid>
             <Entry Placeholder="Type Last Name" Text="{Binding LastName}" Style="{StaticResource entryStyle}" />
 
+            <!-- Full Address -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Text="Full Address" Grid.Column="0" Style="{StaticResource labelAddressStyle}" />
+                <Label Text="{Binding AddressError}" IsVisible="{Binding ShowAddressError}" Grid.Column="1" Style="{StaticResource labelErrorStyle}" />
+            </Grid>
+            <Entry Placeholder="Type Full Address" Text="{Binding Address}" Style="{StaticResource entryStyle}" />
+
+            
             <!-- Email -->
             <Grid>
                 <Grid.ColumnDefinitions>

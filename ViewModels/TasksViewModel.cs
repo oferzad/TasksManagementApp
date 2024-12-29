@@ -153,6 +153,7 @@ namespace TasksManagementApp.ViewModels
                 };
                 //Navigate to the task details page
                 await Shell.Current.GoToAsync("taskview", navParam);
+                
                 SelectedObject = null;
             }
             
