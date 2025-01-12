@@ -43,6 +43,7 @@ namespace TasksManagementApp
             builder.Services.AddTransient<TaskView>();
             builder.Services.AddTransient<AppShell>();
             builder.Services.AddTransient<MapsView>();
+            builder.Services.AddTransient<ChatView>();
 
 
             return builder;
@@ -52,6 +53,7 @@ namespace TasksManagementApp
         {
             builder.Services.AddSingleton<GoogleMapsApiService>();
             builder.Services.AddSingleton<TasksManagementWebAPIProxy>();
+            builder.Services.AddSingleton<ChatProxy>();
             return builder;
         }
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
@@ -63,6 +65,7 @@ namespace TasksManagementApp
             builder.Services.AddTransient<TaskViewModel>();
             builder.Services.AddTransient<AppShellViewModel>();
             builder.Services.AddTransient<MapsViewModel>();
+            builder.Services.AddSingleton<ChatViewModel>();
             return builder;
         }
     }

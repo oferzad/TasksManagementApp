@@ -21,6 +21,10 @@
 Title="Maps" Icon="maps.png"
 ContentTemplate="{DataTemplate views:MapsView}"
 Route="Maps" />
+        <ShellContent
+Title="Chat" Icon="maps.png"
+ContentTemplate="{DataTemplate views:ChatView}"
+Route="Chat" />
         <ShellContent IsVisible="{Binding IsManager}"
 Title="Report" Icon="manager2.png"
 ContentTemplate="{DataTemplate views:ManagerReport}"

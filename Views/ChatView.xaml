@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TasksManagementApp.Views.ChatView"
+             Title="ChatView">
+    <VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding ChatMessages}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <Label Text="{Binding .}"></Label>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Editor Text="{Binding Message}" Placeholder="Type your message here"></Editor>
+        <Editor Text="{Binding ToUserId}" Placeholder="Type USer Id"></Editor>
+        <Button Text="Send" Command="{Binding SendMessageCommand}"></Button>
+    </VerticalStackLayout>
+</ContentPage>
