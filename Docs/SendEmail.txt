@@ -1,0 +1,20 @@
+﻿To send email: 
+1. copy the SendEmailService class from Services.
+2. Add the class to the Services folder in your project.
+3. Add the class to the dependecy injection in the MauiProgram.cs file.
+4. Example of how to use the service in a page:
+
+private async Task<bool> TestEmail(IServiceProvider serviceProvider)
+{
+    SendEmailService? p = serviceProvider.GetService<SendEmailService>();
+    EmailData u = new EmailData()
+    {
+        To = "ofer.zadikario@gmail.com",
+        Subject = "Test",
+        Body = "Test sending to ofer",
+        From = "Kuku"
+    };
+
+    bool b = await p.Send(u);
+    return b;
+}
