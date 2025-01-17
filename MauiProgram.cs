@@ -54,6 +54,7 @@ namespace TasksManagementApp
             builder.Services.AddSingleton<GoogleMapsApiService>();
             builder.Services.AddSingleton<TasksManagementWebAPIProxy>();
             builder.Services.AddSingleton<ChatProxy>();
+            builder.Services.AddSingleton<SendEmailService>();
             return builder;
         }
         public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
