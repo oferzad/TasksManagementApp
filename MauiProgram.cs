@@ -44,6 +44,7 @@ namespace TasksManagementApp
             builder.Services.AddTransient<AppShell>();
             builder.Services.AddTransient<MapsView>();
             builder.Services.AddTransient<ChatView>();
+            builder.Services.AddTransient<StarRatingExample>();
 
 
             return builder;

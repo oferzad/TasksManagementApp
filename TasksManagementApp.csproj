@@ -63,6 +63,8 @@
 	  <None Remove="Resources\Images\maps.png" />
 	  <None Remove="Resources\Images\passwordeye.jpg" />
 	  <None Remove="Resources\Images\profile.png" />
+	  <None Remove="Resources\Images\star.png" />
+	  <None Remove="Resources\Images\star2.png" />
 	  <None Remove="Resources\Images\tasks.png" />
 	  <None Remove="Resources\Images\tasks2.png" />
 	</ItemGroup>
@@ -96,6 +98,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\RegisterView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\StarRatingExample.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TasksView.xaml">
