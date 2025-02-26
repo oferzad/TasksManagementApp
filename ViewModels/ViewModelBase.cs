@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Android.Companion.Virtual;
+using Javax.Security.Auth;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -42,6 +44,28 @@ namespace TasksManagementApp.ViewModels
             {
                 return !this.InServerCall;
             }
+        }
+        #endregion
+
+        #region Shell Refresh
+        public ViewModelBase()
+        {
+            if (Shell.Current != null)
+            {
+                ((AppShell)(Shell.Current)).DataChanged += (type) =>
+                {
+                    if (type == this.GetType())
+                    {
+                        //do something to refresh the page
+                        Refresh();
+                    }
+                };
+            }
+        }
+
+        public virtual void Refresh()
+        {
+            //do something to refresh the page
         }
         #endregion
     }
