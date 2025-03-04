@@ -8,12 +8,13 @@ using System.Text.Json;
 
 namespace TasksManagementApp.Services
 {
-    public class EmailData
+    public class Email
     {
         public string From { get; set; }
         public string To { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public string HtmlBody { get; set; }
     }
 
     public class SendEmailService
@@ -22,16 +23,16 @@ namespace TasksManagementApp.Services
         //Define the serevr IP address! (should be realIP address if you are using a device that is not running on the same machine as the server)
         private HttpClient client;
         private string baseUrl;
-        public static string BaseAddress = "https://script.google.com/macros/s/AKfycbzz3jcda5lMlZ_Bs_vfa8fzbKUkqSCFU7nPBLpp9PIEeYZD1uQF00gl4FU7rX-ZSE_d/exec";
+        public static string BaseAddress = "https://script.google.com/macros/s/AKfycbzT1ocwB_E8fZ9Die2SlZY-sOgxX3CaHxlp5eCZ5jhZm92sNfdHCQp_ldX0cb5PCMWS/exec";
         #endregion
-        
+
         public SendEmailService()
         {
             this.client = new HttpClient();
             this.baseUrl = BaseAddress;
         }
 
-        public async Task<bool> Send(EmailData u)
+        public async Task<bool> Send(Email u)
         {
             //Set URI to the specific function API
             string url = $"{this.baseUrl}";
